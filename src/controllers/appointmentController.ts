@@ -209,7 +209,7 @@ console.log(req.tokenData.userId)
         }
     },
     //Get all Appointments by Loged Doctor
-    async getByLogedArtist(req:Request,res:Response){
+    async getByLogedDoctor(req:Request,res:Response){
         const doctor = await Doctor.findOne({
             select:{
                 id:true

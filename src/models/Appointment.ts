@@ -11,7 +11,7 @@ export class Appointment extends BaseEntity{
     day_date!: Date;
 
     @Column({ name: "doctor_id" })
-    artistID!: number;
+    doctorID!: number;
 
     @Column({name:"client_id"})
     clientID!: number;

@@ -1,14 +1,14 @@
 import express,{Request, Response} from 'express';
-import { artistController } from '../controllers/artistController';
+import { doctorController } from '../controllers/doctorController';
 import { authorizeMiddleware } from '../middlewares/authorize';
 import { authMiddleware } from '../middlewares/authMiddleware';
 
 const router = express.Router();
 
-router.get('/',artistController.getAll);
+router.get('/',doctorController.getAll);
 
 
-router.post('/create',authorizeMiddleware(["Admin"]),artistController.create);
+router.post('/create',authorizeMiddleware(["Admin"]),doctorController.create);
 
 
 export default router;

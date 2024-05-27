@@ -19,7 +19,7 @@ router.delete('/:id',authMiddleware, authorizeMiddleware(["client","doctor"]), a
 router.get('/client/appointments',authMiddleware, appointmentController.getByLogedClient);
 
 //get appointments by doctor
-router.get('/doctor/appointment',authMiddleware, appointmentController.getByLogedArtist);
+router.get('/doctor/appointment',authMiddleware, appointmentController.getByLogedDoctor);
 
 //Rutas de Admin
 
