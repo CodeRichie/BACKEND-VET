@@ -6,13 +6,13 @@ export class DoctorFactory extends Factory<Doctor>{
     protected generate():Doctor{
         return{
             style: faker.helpers.arrayElement([
-                "Neotraditional",
-                "Traditional",
-                "Trashpolka",
-                "Japanese",
-                "Blackworks",
-                "Minimalist",
-                "Realism"
+                "Perros",
+                "Gatos",
+                "Conejos y Cobayas",
+                "Aves",
+                "Reptiles",
+                "Exoticos",
+                "Roedores"
             ]),
             area: faker.location.city()
             
