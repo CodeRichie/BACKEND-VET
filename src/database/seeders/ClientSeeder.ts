@@ -19,9 +19,15 @@ export class ClientSeeder extends Seeder{
             }
         );
         const clients = new ClientFactory().createMany(CLIENTS);
-        clients.forEach((client: { user: User; })=>{
-            client.user=getRandomValueFromArray(users)
-        })
+        //clients.forEach((client: { user: User; })=>{
+            //client.user=getRandomValueFromArray(users)
+        //})
+        clients.forEach((client: { user: User; }) =>{
+            const user = users.pop()
+            if(user) 
+                return client.user = user
+            }
+        )
         await Client.save(clients);
     } 
 }
