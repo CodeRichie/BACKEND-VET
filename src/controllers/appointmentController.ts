@@ -12,6 +12,7 @@ export const appointmentController = {
 
     //Get all Appointments
     async getAll(req:Request,res:Response){
+        console.log('admin', req)
         try {
             const page = Number(req.query.page) || 1;
             const limit = Number(req.query.limit) || 10;
@@ -26,8 +27,6 @@ export const appointmentController = {
                     },
                 }
             );
-            console.log('appointments', appointments)
-            console.log('totalAppointments', totalAppointments)
             res.json(appointments).status(200);
 
         }catch(error){
@@ -81,7 +80,6 @@ export const appointmentController = {
                 return;
             }
 
-            console.log(appointment);
 
             res.json(appointment);
         }catch(error){
@@ -93,9 +91,7 @@ export const appointmentController = {
     //Create Appointment
     async create(req:Request,res:Response){
         try {
-console.log(req.tokenData.userId)
             const {day_date,description,price,doctor,client} = req.body;
-            console.log(day_date)
 
             const appointment = Appointment.create({
                 day_date:day_date,
@@ -108,7 +104,6 @@ console.log(req.tokenData.userId)
             await appointment.save();
             res.json(appointment);
         }catch(error){
-            console.log(error)
             res.status(500).json({message:"Something went wrong"});
             
         }
@@ -157,6 +152,7 @@ console.log(req.tokenData.userId)
     
     async getByLogedClient(req:Request,res:Response){
         try {        
+            console.log('req.tokenData?.userId', req.tokenData?.userId);
             const logedClient = await Client.findOne({
                 select:{
                     id:true
@@ -164,6 +160,9 @@ console.log(req.tokenData.userId)
                 where:{
                     userID: req.tokenData?.userId
             }});
+
+            console.log('logedClient', logedClient);
+
         
             const appointments = await Appointment.find({
                 relations:{
@@ -195,11 +194,11 @@ console.log(req.tokenData.userId)
                     }
                 },
                 where:{
-                    clientID:logedClient?.id
+                    clientID:req.tokenData?.userId
                 }
             });
         
-                
+                console.log('appointments', appointments)
                  res.json(appointments).status(200);
             
     
@@ -210,6 +209,7 @@ console.log(req.tokenData.userId)
     },
     //Get all Appointments by Loged Doctor
     async getByLogedDoctor(req:Request,res:Response){
+        
         const doctor = await Doctor.findOne({
             select:{
                 id:true
@@ -217,9 +217,7 @@ console.log(req.tokenData.userId)
             where:{
                 userID:req.tokenData?.userId
             }});
-            console.log('req.tokenData?.userId', req.tokenData?.userId);
-            console.log('doctor', doctor);
-    
+            console.log('doctor', doctor)
         const appointments = await Appointment.find({
             relations:{
                 doctor:true,

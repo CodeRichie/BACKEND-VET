@@ -22,7 +22,6 @@ export const userController = {
         try {
             const {firstName,lastName,email,phone,password,isActive,} = req.body;
             const hashedPassword = await bcrypt.hash(password,10);
-            console.log(req.body, firstName)
             let user = User.create({
                 firstName: firstName,
                 lastName: lastName,

@@ -19,13 +19,11 @@ export const authMiddleware = (
             res.status(401).json({ message: "Unauthorized" });
             return;
         }
-        console.log('secret',process.env.JWT_SECRET)
         //verify the token
         const decoded = jwt.verify(
             token,
             process.env.JWT_SECRET as string
         ) as JwtPayload;
-        console.log('decoded',decoded)
         //add the token data to the request    
         req.tokenData = {
             userId: decoded.userId,

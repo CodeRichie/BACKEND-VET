@@ -25,7 +25,6 @@ export const doctorController = {
                     }
                 }
             );
-            console.log('doctors', doctors)
             res.json(doctors);
 
         }catch(error){
