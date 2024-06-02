@@ -1,0 +1,148 @@
+# Backend de Clinica Veterinaria Animals
+
+## Objetivo
+Es una API funcional conectada con relaciones entre las tablas donde puedes acceder modificar y eliminar los datos con diferentes roles.
+
+## El proyecto
+
+ - Dibujar unb Flow de la base de datos.
+ - Crear las carpetas y sus dependencias.
+ - Creación de una base de datos.
+ - Conectar con el servidor.
+ - Creación de las Migraciones, Seedes y Factory.
+ - Creación de las rutas.
+ - Comprobación de errores, y comprobación de los endpoint con Insomnia.
+
+ ## Tecnologias
+
+ ![](https://img.shields.io/badge/TypeScript-lightblue?logo=TypeScript)
+ ![](https://img.shields.io/badge/insomnia-purple?logo=Insomnia)
+ ![](https://img.shields.io/badge/node-green?logo=node.js)
+ ![](https://img.shields.io/badge/npm-red?logo=npm)
+
+ ## Diagrama 
+
+
+
+ ## Endpoints
+<details>
+<summary>Endpoints</summary>
+
+## Endpoints
+
+- REGISTER/LOGIN
+
+    //ADMIN DOCTOR, CLIENT
+    - Registro de usuarios.
+
+            POST http://localhost:3000/api/users/create
+        body:
+        ``` js
+            {
+                 "firstName": "Wilfred",
+                 "email": "Cheyenne.Kassulke@gmail.com",
+                 "password": "12345678",
+                 "role": "ADMIN"
+            }
+        ```
+- USERS INFO
+
+    //ADMIN, DOCTOR, CLIENT
+    - Ver perfil.
+            
+            GET http://localhost:3000/api/users/profile/
+    
+
+    //ADMIN, DOCTOR, CLIENT
+    - Modificar los datos.
+    
+            PUT http://localhost:3000/api/users/profile/update
+
+         body:
+        ```js
+	    {
+		"id": 14,
+		"firstName": "Zach",
+		"lastName": "Dietrich",
+		"email": "Isaac.Walter@gmail.com",
+		"phone": 290867512,
+		"isActive": true
+        }
+
+
+    //ADMIN DOCTOR, CLIENT
+    - Logear el user. 
+
+            POST http://localhost:3000/api/auth/login  
+        body:
+        ``` js
+            {
+                "email": "ricardadmin@gmail.com",
+                "password": "87654321"
+            }
+        ```
+    
+- APPOINTMENTS INFO
+
+    //ADMIN, DOCTOR
+    - pedir la cita.
+    
+            POST http://localhost:3000/api/appointments/create
+        
+        body:
+        ```js
+            {
+                "day_date": "2024-01-26",
+	            "description": "Pulgas",
+	            "doctor":1,
+	            "client":34,
+	            "price":50 
+                
+            }
+
+        - DOCTORS INFO
+
+    //ADMIN, DOCTOR, CLIENT
+    - Lista de los doctores
+            
+            GET http://localhost:3000/api/doctors
+      //DOCTOR
+    - Ver las citas de cada doctor.
+    
+            GET http://localhost:3000/api/appointments/doctor/appointment
+    
+    //CLIENT
+    - Ver mis citas con un get
+        
+            GET http://localhost:3000/api/appointments/client/appointment
+
+
+    //ADMIN, DOCTOR, CLIENT
+    - Eliminar citas con el delete
+    
+            DELETE http://localhost:3000/api/appointments/8
+    
+    
+    //ADMIN, DOCTOR
+    - Editar citas con el put
+    
+            PUT http://localhost:3000/api/appointments/1
+
+        body:
+        ```js
+	{
+		"id": 2,
+		"day_date": "2024-07-15T06:33:45.000Z",
+		"description": "Somnus cubicularis distinctio urbanus.",
+		"price": 2917
+	}
+
+    //DOCTOR
+    - Ver todas las citas existentes conmigo (role tatuador).
+    
+            GET http://localhost:3000/api/appointments/doctor/appointment
+
+
+
+
+</details>
