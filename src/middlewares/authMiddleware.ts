@@ -10,15 +10,16 @@ export const authMiddleware = (
 
 
 
-    try {
+
         //split the token from the header    
-        // console.log('req.headers.authorization', req.headers.authorization)
         const token = req.headers.authorization?.split(" ")[1];
         //if there is no token, return a 401 status
         if (!token) {
             res.status(401).json({ message: "Unauthorized" });
             return;
         }
+
+    try {
         //verify the token
         const decoded = jwt.verify(
             token,
@@ -36,7 +37,6 @@ export const authMiddleware = (
         next();
 
     } catch (error) {
-        console.log('error', error)
         res.status(401).json({ message: "Unauthorized mal" });
 
         return;

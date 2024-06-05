@@ -10,10 +10,10 @@ const router = express.Router();
 router.post('/create',authMiddleware, appointmentController.create);
 
 //edit appointment
-router.put('/:id',authMiddleware, authorizeMiddleware(["doctor"]), appointmentController.update);
+router.put('/:id',authMiddleware, authorizeMiddleware(["admin","doctor"]), appointmentController.update);
 
 //delete appointment
-router.delete('/:id',authMiddleware, authorizeMiddleware(["client","doctor"]), appointmentController.delete);
+router.delete('/:id',authMiddleware, authorizeMiddleware(["admin","doctor"]), appointmentController.delete);
 
 //get appointments by client
 router.get('/client/appointments',authMiddleware, appointmentController.getByLogedClient);
@@ -24,7 +24,7 @@ router.get('/doctor/appointment',authMiddleware, appointmentController.getByLoge
 //Rutas de Admin
 
 //get all appointments
-router.get('/',authMiddleware, appointmentController.getAll);
+router.get('/',authMiddleware, authorizeMiddleware(["admin"]), appointmentController.getAll);
 
 //get appointment by id
 router.get('/:id',authMiddleware,authorizeMiddleware(["admin"]), appointmentController.getById);
