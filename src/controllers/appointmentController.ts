@@ -105,13 +105,18 @@ export const appointmentController = {
     //Create Appointment
     async create(req: Request, res: Response) {
         try {
+            const doctordata = await Doctor.findOne({where: {userID:req.tokenData.userId}})
+            if (!doctordata) {
+                res.status(404).json({ message: "Doctor not found" });
+                return;
+            }
             const { day_date, description, price, doctor, client } = req.body;
 
             const appointment = Appointment.create({
                 day_date: day_date,
                 description: description,
                 price: price,
-                doctorID: req.tokenData.userId,
+                doctorID: doctordata.id,
                 clientID: client
             });
 
